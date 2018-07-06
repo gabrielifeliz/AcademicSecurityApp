@@ -31,14 +31,19 @@ public class MainController {
     
     @PostConstruct
     public void loadData(){
-        AppRole ordinaryUser = new AppRole("USER");
-        roles.save(ordinaryUser);
 
-        AppRole admin = new AppRole("ADMIN");
-        roles.save(admin);
+        AppRole student = new AppRole("STUDENT");
+        roles.save(student);
 
-        AppUser newUser = new AppUser("user", "password");
-        newUser.addRole(ordinaryUser);
-        users.save(newUser);
+        AppRole teacher = new AppRole("TEACHER");
+        roles.save(teacher);
+
+        AppUser studentLogin = new AppUser("student", "pwstudent");
+        studentLogin.addRole(student);
+        users.save(studentLogin);
+
+        AppUser teacherLogin = new AppUser("teacher", "pwteacher");
+        teacherLogin.addRole(teacher);
+        users.save(teacherLogin);
     }
 }

@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**","/img/**","/js/**").permitAll()
+                .antMatchers("/css/**","/img/**","/js/**", "/h2/**").permitAll()
                 .antMatchers("/").hasAnyAuthority("STUDENT", "TEACHER")
                 .antMatchers("/studentorteacher").hasAnyAuthority("STUDENT", "TEACHER")
                 .anyRequest()
@@ -42,13 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder pwEncoder = new BCryptPasswordEncoder();
-
-        auth.inMemoryAuthentication().withUser("student").password(pwEncoder.encode("pwstudent")).authorities("STUDENT")
-                .and()
-                .withUser("teacher").password(pwEncoder.encode("pwteacher")).authorities("TEACHER")
-                .and()
-                .passwordEncoder(pwEncoder);
-        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(pwEncoder);
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(new BCryptPasswordEncoder());
     }
 }
