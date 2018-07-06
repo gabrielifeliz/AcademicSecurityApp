@@ -11,10 +11,20 @@
 		th:insert="base :: navbarstudent"></nav>
 	<nav sec:authorize="hasAuthority('TEACHER')"
 		th:insert="base :: navbarteacher"></nav>
-	<div class="container">
-		<h2 sec:authorize="hasAuthority('STUDENT')">Student Dashboard</h2>
-		<h2 sec:authorize="hasAuthority('TEACHER')">Course List</h2>
+	<div class="container" sec:authorize="hasAuthority('STUDENT')">
+        <br/>
+		<h2>Student Dashboard</h2>
+        <br/>
+		<h4>STUDENT</h4>
+        <br/>
 	</div>
+    <div class="container" sec:authorize="hasAuthority('TEACHER')">
+        <br/>
+        <h2>Course Link</h2>
+        <br/>
+        <h4>TEACHER</h4>
+        <br/>
+    </div>
 	<th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>
