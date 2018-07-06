@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Title</title>
+<th:block th:replace="base :: csslinks"></th:block>
+</head>
+<body>
+	<nav sec:authorize="hasAuthority('STUDENT')"
+		th:insert="base :: navbarstudent"></nav>
+	<nav sec:authorize="hasAuthority('TEACHER')"
+		th:insert="base :: navbarteacher"></nav>
+	<div class="container">
+		<h2 sec:authorize="hasAuthority('STUDENT')">Student Dashboard</h2>
+		<h2 sec:authorize="hasAuthority('TEACHER')">Course List</h2>
+	</div>
+	<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>
